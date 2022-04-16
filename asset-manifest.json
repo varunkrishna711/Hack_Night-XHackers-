@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Hack_Night-XHackers-/static/css/main.c40aeb6f.css",
+    "main.js": "/Hack_Night-XHackers-/static/js/main.41c8a9ce.js",
+    "static/media/icons8-twitter.svg": "/Hack_Night-XHackers-/static/media/icons8-twitter.fe06d572bd13680e66f4d31fc7cf1832.svg",
+    "index.html": "/Hack_Night-XHackers-/index.html",
+    "main.c40aeb6f.css.map": "/Hack_Night-XHackers-/static/css/main.c40aeb6f.css.map",
+    "main.41c8a9ce.js.map": "/Hack_Night-XHackers-/static/js/main.41c8a9ce.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c40aeb6f.css",
+    "static/js/main.41c8a9ce.js"
+  ]
+}
