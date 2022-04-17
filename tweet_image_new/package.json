@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://varunkrishna711.github.io/Hack_Night-XHackers-/",
-  "proxy": "https://tweet-to-image-converter.herokuapp.com/",
+  "proxy": "https://tweet-to-image-converter.herokuapp.com",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
