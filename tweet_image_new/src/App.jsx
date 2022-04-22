@@ -29,7 +29,8 @@ function App() {
   function getdata() {
     console.log("loading");
     axios
-      .get(`/api/2/tweets?id=${id}`, {})
+      .get(`${process.env.REACT_APP_URL}/api/2/tweets?id=${id}`, {})
+      // .get(`/api/2/tweets?id=${id}`, {})
       .then((response) => {
         setData(response.data);
         console.log(data);
@@ -39,7 +40,7 @@ function App() {
   }
 
   function download(e) {
-    html2canvas(document.querySelector('.container')).then((canvas) => {
+    html2canvas(document.querySelector(".container")).then((canvas) => {
       const base64img = canvas.toDataURL("image/png");
       let anchor = document.createElement("a");
       anchor.setAttribute("href", base64img);
