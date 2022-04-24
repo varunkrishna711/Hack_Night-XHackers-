@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRef } from "react";
 import twitterimg from "./icons8-twitter.svg";
-import html2canvas from "html2canvas";
+import domtoimage from "dom-to-image";
 
 function App() {
   const [data, setData] = useState({});
@@ -21,11 +21,6 @@ function App() {
     getdata();
   };
 
-  // function fid1() {
-  //   seturl(textRef.current.value);
-  //   setId(textRef.current.value?.split("/")[5]?.split("?")[0]);
-  // }
-
   function getdata() {
     console.log("loading");
     axios
@@ -40,14 +35,14 @@ function App() {
   }
 
   function download(e) {
-    html2canvas(document.querySelector(".container")).then((canvas) => {
-      const base64img = canvas.toDataURL("image/png");
-      let anchor = document.createElement("a");
-      anchor.setAttribute("href", base64img);
-      anchor.setAttribute("download", "twt-img.png");
-      anchor.click();
-      anchor.remove();
-    });
+    domtoimage
+      .toJpeg(document.getElementById("node"), { quality: 0.99 })
+      .then(function (dataUrl) {
+        var link = document.createElement("a");
+        link.download = "tweet.jpeg";
+        link.href = dataUrl;
+        link.click();
+      });
   }
 
   return (
@@ -57,10 +52,9 @@ function App() {
           id="url"
           type="text"
           placeholder="Paste URL of tweet"
-          onClick="this.select();"
+          onClick={(e) => e.target.select()}
           onPaste={(e) => {
             seturl(e.target.value);
-            // console.log(url);
             setId(textRef.current.value?.split("/")[5]?.split("?")[0]);
           }}
           onChange={(e) => {
@@ -75,30 +69,32 @@ function App() {
 
       {data.data && (
         <>
-          <div className="container" ref={ctnRef}>
-            <div className="card">
-              <div className="head">
-                <div className="left">
-                  <img
-                    id="dp"
-                    src={data.includes.users[0].profile_image_url}
-                    alt="profile"
-                    className="src"
-                  />
-                </div>
-
-                <div className="right">
-                  <div className="name">{data.includes.users[0].name}</div>
-                  <div className="uname">
-                    @{data.includes.users[0].username}
+          <div className="container-dup">
+            <div id="node" className="container" ref={ctnRef}>
+              <div className="card">
+                <div className="head">
+                  <div className="left">
+                    <img
+                      id="dp"
+                      src={data.includes.users[0].profile_image_url}
+                      alt="profile"
+                      className="src"
+                    />
                   </div>
+
+                  <div className="right">
+                    <div className="name">{data.includes.users[0].name}</div>
+                    <div className="uname">
+                      @{data.includes.users[0].username}
+                    </div>
+                  </div>
+                  <img id="logo" src={twitterimg} alt="twitter" />
                 </div>
-                <img id="logo" src={twitterimg} alt="twitter" />
+
+                <div className="body">{data.data.text}</div>
+
+                <div className="footer"></div>
               </div>
-
-              <div className="body">{data.data.text}</div>
-
-              <div className="footer"></div>
             </div>
           </div>
 
@@ -107,7 +103,6 @@ function App() {
           </button>
         </>
       )}
-      <div className="card"></div>
     </div>
   );
 }
